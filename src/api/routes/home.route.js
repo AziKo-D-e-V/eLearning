@@ -8,6 +8,7 @@ const {
   allcourses,
   allpopular,
   allexperts,
+  UpdCourse,
 } = require("../controllers/home.controller");
 const {
   create,
@@ -19,6 +20,7 @@ const {
   deletePopular,
   deleteExperts,
 } = require("../controllers/delete.controller");
+const { UpdateCourse } = require("../controllers/update.controller");
 
 const router = Router();
 
@@ -27,8 +29,10 @@ router.get("/admin", isAuth, adminPage);
 router.get("/admin/allcourses", isAuth, allcourses);
 router.get("/admin/allpopular", isAuth, allpopular);
 router.get("/admin/allexperts", isAuth, allexperts);
+router.get("/updcourse", isAuth, UpdCourse);
 router.get("/form", formPage);
 router.post("/admin/courses", create);
+router.post("/admin/updcourses/:id", UpdateCourse)
 router.post("/admin/popular", createPopular);
 router.post("/admin/expert", createExpert);
 router.delete("/deleteCourses/:id", deleteCourses);
