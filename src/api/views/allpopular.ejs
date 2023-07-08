@@ -29,17 +29,17 @@
     />
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+    <link href="/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
     <link
-      href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css"
+      href="/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css"
       rel="stylesheet"
     />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.minn.css" rel="stylesheet" />
+    <link href="/css/bootstrap.minn.css" rel="stylesheet" />
 
     <!-- Template Stylesheet -->
-    <link href="css/stylee.css" rel="stylesheet" />
+    <link href="/css/stylee.css" rel="stylesheet" />
   </head>
 
   <body>
@@ -159,63 +159,44 @@
         </nav>
         <!-- Navbar End -->
         <div class="container-fluid pt-4 px-4">
-          <div class="row g-4">
-            <div class="col-sm-6 col-xl-3">
-              <div
-                class="bg-secondary rounded d-flex align-items-center justify-content-between p-4"
-              >
-                <div class="rounded p-4 mb-2">
-                  <h4 class="text-center">Show all Courses Categories</h4>
-                  <a href="/admin/allcourses">
-                    <button
-                      type="submit"
-                      class="btn btn-primary w-100 m-1 mt-3"
-                    >
-                      Show
-                    </button>
-                  </a>
+            <div class="container-fluid pt-4 px-4"> 
+                <div class="row g-4">
+                    <div class="col-12">
+                        <div class="bg-secondary rounded h-100 p-4">
+                            <h6 class="mb-4">Popular Courses Table</h6>
+                            <div class="table-responsive">
+                                <table class="table text-center">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Popular Courses Image</th>
+                                            <th scope="col">Popular Courses </th>
+                                            <th scope="col">Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% Courses.forEach((course) =>{ %>
+                                            <tr>
+                                                <td>
+                                                    <img class="img-fluid rounded-circle mx-auto mb-4" src=<%= "/" + course.image %> style="width: 100px; height: 100px;">
+                                                </td>
+                                                <td>
+                                                    <%= course.course %>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary m-2 delete-course" data-id='<%= course.id %>'>Delete</button>
+                                                </td>
+                                            </tr>
+                                        <%})%>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3">
-              <div
-                class="bg-secondary rounded d-flex align-items-center justify-content-between p-4"
-              >
-                <div class="rounded p-4 mb-2">
-                  <h4 class="text-center">Show all Popular Courses</h4>
-                  <a href="/admin/allpopular">
-                    <button
-                      type="submit"
-                      class="btn btn-primary w-100 m-1 mt-3"
-                    >
-                      Show
-                    </button>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3">
-              <div
-                class="bg-secondary rounded d-flex align-items-center justify-content-between p-4"
-              >
-                <div class="rounded p-4 mb-2">
-                  <h4 class="text-center">Show all Expert Instructors</h4>
-                  <a href="/admin/allexperts">
-                    <button
-                      type="submit"
-                      class="btn btn-primary w-100 m-1 mt-3"
-                    >
-                      Show
-                    </button>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+            </div> 
 
         <!-- Footer End -->
-      </div>
+        </div>
       <!-- Content End -->
 
       <!-- Back to Top -->
@@ -227,15 +208,33 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/chart/chart.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="/lib/chart/chart.min.js"></script>
+    <script src="/lib/easing/easing.min.js"></script>
+    <script src="/lib/waypoints/waypoints.min.js"></script>
+    <script src="/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/lib/tempusdominus/js/moment.min.js"></script>
+    <script src="/lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
     <!-- Template Javascript -->
-    <script src="js/mainn.js"></script>
+    <script src="/js/mainn.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const buttons = document.querySelectorAll(".delete-course")
+        buttons.forEach(element => {element.addEventListener("click", ()=>{
+            const id = element.getAttribute("data-id")
+            console.log(id); 
+            fetch(`/deletePopular/${id}`,{
+              method : "delete"
+            }).then((response) =>{
+             alert("course deleted successfully")
+             window.location.reload()
+            }).catch((error)=>{
+             alert("Failed to delete course")
+            })
+        })
+       
+       })
+       </script>
   </body>
 </html>

@@ -3,7 +3,6 @@ const cookie = require("cookie-parser");
 
 
 const isAuth = (req, res, next) => {
-  console.log(req.cookies);
   try {
     const { token } = req.cookies;
 

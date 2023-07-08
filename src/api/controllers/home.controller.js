@@ -19,9 +19,25 @@ const formPage = async (req, res) => {
   res.render("form");
 };
 const allcourses = async (req, res) => {
-  const Courses = await pg(`select * from courses `);
+  const Courses = await pg(`select * from courses`);
 
-  res.render("allcourses", { Courses });
+  res.render("allcourses", {
+    Courses,
+  });
+};
+const allpopular = async (req, res) => {
+  const Courses = await pg(`select * from popular`);
+
+  res.render("allpopular", {
+    Courses,
+  });
+};
+const allexperts = async (req, res) => {
+  const Courses = await pg(`select * from experts`);
+
+  res.render("allexperts", {
+    Courses,
+  });
 };
 
 module.exports = {
@@ -29,4 +45,6 @@ module.exports = {
   adminPage,
   formPage,
   allcourses,
+  allpopular,
+  allexperts,
 };
